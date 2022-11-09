@@ -1,0 +1,76 @@
+<section class="dashboard">
+    <div class="left"><div class="message"><div class="danger"><%=error%></div>
+        <div class="success"><%=success%></div></div>
+        <h2>Panel klienta</h2>
+        <p>jesteś zalogowany jako:</p>
+        <h3><%= username %></h3>
+        <div class="left_side_buttons">
+            <h3><a href="/addorder">+ dodaj zlecenie</a></h3>
+            <h3><a href="/client">moje dane</a></h3>
+            <h3><a href="/logout">wyloguj się</a></h3>
+        </div>
+
+    </div>
+    <div class="right">
+        <h2>Historia zleceń</h2>
+        <ul class="list">
+            <% for (const i in data) { %>
+            <% if (data[i].dataValues.order_status != "anulowane") { %>
+            <li class="orders">
+                <p><span>Zlecenie numer: </span><%= data[i].dataValues.order_id %> |
+                    <span>Utworzony: </span><% let date = data[i].dataValues.createdAt %>
+                    <%= date.toLocaleString() %>
+                </p>
+                <p>
+                    <%= data[i].dataValues.number_of_files %> plików |
+                    <span>Termin realizacji: </span><% let com_date = data[0].dataValues.completion_date %>
+                    <%= com_date == null ? 'jeszcze nie ustalony' : com_date.toLocaleDateString() %>
+                </p>
+                <p>
+                    <span>Status: </span><i <%switch(data[i].dataValues.order_status){
+                        case "do wyceny": %> style="color: black;" <% break;
+                        case "do akceptacji": %> style="color: #972C14;" <% break;
+                        case "anulowane": %> style="color: #972C14;" <% break;
+                        case "odrzucone": %> style="color: #972C14;" <% break;
+                        case "potwierdzone": %> style="color: #149747;" <% break;
+                        case "do realizacji": %> style="color: #149747;" <% break;
+                        case "gotowe": %> style="color: #149747;" <% break;
+                        default:
+                        break; } %>>
+                    <%= data[i].dataValues.order_status %></i> |
+                    <span> Cena: </span><%= data[i].dataValues.order_price %> PLN |
+                    <span>Płatność: </span><i <% switch (data[i].dataValues.payment_status) {
+                    case "oczekuje": %> style="color: #972C14;" <% break;
+                    case "zapłacone": %> style="color: #149747;" <% break;
+                    case "odroczone": %> style="color: black;" <% break;
+                    case "darmowa wycena": %> style="color: #149747;" <% break;
+                    case "potwierdzenie pdf": %> style="color: #149747;" <% break;
+                    default:
+                    break; } %>><%= data[i].dataValues.payment_status %></i>
+                </p>                
+            </li>
+            <li class="controllers">
+
+            
+            <% if (data[i].dataValues.order_status == "do wyceny") { %>
+            <form class="no_style" method="POST" onsubmit="return confirm('Czy na pewno chcesz anulować to zlecenie?')"
+                action="/abort/<%= data[0].dataValues.order_ref %>?_method=PUT">
+                <input class="cancel_order" type="submit" value="Anuluj zlecenie">
+            </form><br>
+            <% } %>
+            <% if (data[i].dataValues.order_status == "do akceptacji" &&  data[i].dataValues.payment_status == "oczekuje" ) { %>
+            <a style="color: grey;" href="/decline/<%= data[i].dataValues.order_ref %>">Rezygnuje</a>
+            <a style="color: green;" href="/confirm/<%= data[i].dataValues.order_ref %>">Akceptuje</a>
+            <br>
+            <% } %>
+            <% if ((data[i].dataValues.payment_status == "oczekuje" && ( data[i].dataValues.order_status == "potwierdzone" || data[i].dataValues.order_status == "do realizacji" || data[i].dataValues.order_status == "gotowe")) || (data[i].dataValues.payment_status == "odroczone" && data[i].dataValues.order_status == "gotowe" )) { %>
+            <a style="color: green;" href="/accept/<%= data[i].dataValues.order_ref %> ">Opłać</a>
+            <% } %>
+            <p>|</p> <a href="<%=/order/+data[i].dataValues.order_ref %>">zobacz szczegóły</a>
+            <% } %>
+            <% } %>
+            </li>
+        </ul>
+
+    </div>
+</section>

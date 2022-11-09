@@ -1,0 +1,103 @@
+.loader {
+  font-size: 48px;
+  color: #FFF;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.loader:after {
+  content: '';
+  height: 4px;
+  width: 0%;
+  display: block;
+  background: #FF3D00;
+  -webkit-animation: 5s lineGrow linear infinite;
+          animation: 5s lineGrow linear infinite;
+}
+
+@-webkit-keyframes lineGrow {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes lineGrow {
+  to {
+    width: 100%;
+  }
+}
+
+.lock_loader {
+  width: 64px;
+  height: 44px;
+  position: relative;
+  border: 5px solid #fff;
+  border-radius: 8px;
+}
+
+.lock_loader::before {
+  content: '';
+  position: absolute;
+  border: 5px solid #fff;
+  width: 32px;
+  height: 28px;
+  border-radius: 50% 50% 0 0;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
+}
+
+.lock_loader::after {
+  content: '';
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-box-shadow: 16px 0 #fff, -16px 0 #fff;
+          box-shadow: 16px 0 #fff, -16px 0 #fff;
+  -webkit-animation: flash 0.5s ease-out infinite alternate;
+          animation: flash 0.5s ease-out infinite alternate;
+}
+
+@-webkit-keyframes flash {
+  0% {
+    background-color: rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 white;
+            box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 white;
+  }
+  50% {
+    background-color: white;
+    -webkit-box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 rgba(255, 255, 255, 0.25);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 16px 0 white, -16px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: 16px 0 white, -16px 0 rgba(255, 255, 255, 0.25);
+  }
+}
+
+@keyframes flash {
+  0% {
+    background-color: rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 white;
+            box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 white;
+  }
+  50% {
+    background-color: white;
+    -webkit-box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: 16px 0 rgba(255, 255, 255, 0.25), -16px 0 rgba(255, 255, 255, 0.25);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 16px 0 white, -16px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: 16px 0 white, -16px 0 rgba(255, 255, 255, 0.25);
+  }
+}
+/*# sourceMappingURL=animation.css.map */

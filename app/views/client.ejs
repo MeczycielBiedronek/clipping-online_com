@@ -1,0 +1,44 @@
+<section class="dashboard">
+    <div class="left">
+        <div class="message">
+            <div class="danger"><%=message%></div>
+            <div class="success"><%=success%></div>
+        </div>
+        <h2>Panel klienta</h2>
+        <p>jesteś zalogowany jako:</p>
+        <h3><%= user.email %></h3>
+        <p>Konto utworzone</p>
+        <h4><% let date = user.createdAt %>
+            <%= date.toLocaleString() %></h4>
+        <div class="left_side_buttons">
+            <h3><a href="/dashboard">lista moich zleceń</a></h3>    
+            <h3><a href="/client_edit/">edytuj dane</a></h3>    
+            <h3><a href=<%= "/resetpassword/" + user.user_ref %>>zmień hasło</a></h3>    
+            <h3><a href="/logout">wyloguj się</a></h3>
+        </div>
+    </div>
+    <div class="right">
+        <h2>Moje dane</h2>
+        <ul class="client_detail personalia"> 
+            <h4>Personalia</h4>
+        <li>imię i nazwisko: <span><%= user.first_last_name %></span></li>
+        <li>email: <span><%= user.email %></span></li>
+        <li>telefon: <span><%= user.phone %></span></li>
+        </ul>
+        
+        <ul class="client_detail invoicing"> 
+            <h4>Dane fakturowe</h4>
+        <li>firma: <span><%= user.comp_name %></span></li>
+        <li>nr podatkowy / NIP: <span><%= user.tax_number %></span></li>
+        <li>kraj: <span><%= user.country %></span></li>
+        <li>miasto: <span><%= user.address_line1 %></span></li>
+        <li>ulica: <span><%= user.address_line2 %></span></li>
+        <li>poczta: <span><%= user.address_line3 %></span></li>
+        </ul>
+    </div>
+
+</section>
+
+
+            
+

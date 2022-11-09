@@ -1,0 +1,578 @@
+<div class="msg-popup err"><%= error %></div>
+<div class="msg-popup msg"><%= message %></div>
+
+<section class="hero">
+  <article>
+    <div class="hero_article quick_form">
+      <form id="quick_contact_form" enctype="multipart/form-data" name="addorder" method="post" action="/addorder">
+          <h2>szybka wycena</h2>
+          <span>
+              szybka odpowiedź | pierwsze zdjęcie gratis <br>
+              bez logowania | bez zobowiązań
+          </span>
+          <label class="miodek" for="name"></label>
+          <input class="miodek" autocomplete="new-password" type="text" id="name" name="name" placeholder="To pole musi zostać puste">
+          <input name="user_email"
+          <% if (user) { %>
+           value="<%=user.email%>"
+          <% } else {  %>
+            placeholder="Twój email*"
+          <% } %> required>
+          <input type="text" name="order_description" placeholder="opis zlecenia*" required>
+          <div class="file_select">
+              <label for="file-upload"></label>
+              <input id="file-upload" type="file" name="multi_files" accept="image/*" onchange="ValidateMultipleInput()" multiple required>
+            </div>
+          <input type="submit" value="wyślij">
+      </form>
+
+  </div>
+  <div class="hero_article eye-catcher desktop">
+      <h1>
+          usuwanie tła zdjęć <br>
+          ścieżki wektorowe <br>
+          fotomanipulacja <br>
+          retusz <br>
+      </h1>
+      <h2>
+          szybka wycena <br>
+          realizacja w 24h <br>
+          łatwa wymiana danych
+      </h2>
+      <div class="arrow">
+      </div>
+
+  </div>
+  </article>
+
+
+    <div id="hero" class="hero_image">
+      <div class="mobile">
+      <h1 >
+        usuwanie tła zdjęć <br>
+        ścieżki wektorowe <br>
+        fotomanipulacja <br>
+        retusz <br>
+    </h1>
+</div>
+        <div id="hero_image" class="hero_image_bcg">
+            <nav class="hero_image_options">
+                <span onclick="changePicture(3)">ścieżka</span>|
+                <span onclick="changePicture(2)">szparowanie</span>|
+                <span onclick="changePicture(1)">cień</span>
+            </nav>
+        </div>
+        <div class="mobile">
+
+        <h2>
+          realizacja w 24h <br>
+          łatwa wymiana danych
+      </h2>
+    </div>
+
+        <!-- <nav class="hero_image_change">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+        </nav> -->
+    </div>
+
+</section>
+
+<section id="logos" class="logos desktop">
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div>
+</section>
+
+<section style="min-height: 100vh;" class="services">
+    <article>
+        <h2>Wiemy co Cię męczy!<br>
+            <span>zrobimy to za Ciebie.</span>
+        </h2>
+        <p>
+        Znaczną część czasu pracy studia fotograficznego <br>
+        zajmują <b>żmudne i powtarzalne czynności</b> takie jak <a href="#"> obróbka zdjęć.</a><br>
+Zdejmiemy ten ciężar z Twoich barków!
+        </p>
+        <a href="/addorder">
+        <button class="primary">
+            dodaj zlecenie
+        </button></a>
+        <mark>
+            szybka odpowiedź | zdjęcie przykładowe gratis<br>
+bez logowania | bez zobowiązań
+        </mark>
+        <a href="/articles/gallery">
+        <button class="secondary">
+            zobacz przykłady
+        </button></a>
+    </article>
+    <article>
+<ul>
+    <li>Usuwanie tła zdjęć</li>
+    <li>Obróbka zdjęć produktowych</li>
+    <li>Ścieżki wektorowe</li>
+    <li>Retusz / Fotomontaż</li>
+    <li>Niewidzialny manekin</li>
+    <li>Wektoryzacja bitmap</li>
+</ul>
+    </article>
+</section>
+<section class="models">
+  <style>
+    .keen-slider:not([data-keen-slider-disabled]){-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;align-content:flex-start;display:flex;overflow:hidden;position:relative;touch-action:pan-y;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-khtml-user-select:none;width:100%}.keen-slider:not([data-keen-slider-disabled]) 
+    .keen-slider__slide{min-height:100%;position:relative;width:100%}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-reverse]{flex-direction:row-reverse}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-v]{flex-wrap:wrap}
+</style>
+  <div id="my-keen-slider" class="keen-slider" style="width: 100%; height: 90vh;">
+    <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/1-blur.webp"
+        data-srcset="/img/gal/models/1.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/1-blur.jpg"
+        data-src="/img/gal/models/1.jpg"
+        alt="A man in a colorfull jacket"
+        loading="lazy">
+    </picture>
+    </div>
+    <div
+    class="keen-slider__slide"
+    style="height: 100%;">
+  <picture class="lazy-picture">
+    <source
+      srcset="/img/gal/models/4-blur.webp"
+      data-srcset="/img/gal/models/4.webp"
+      type="image/webp">
+    <img
+      height="100%"
+      src="/img/gal/models/4-blur.jpg"
+      data-src="/img/gal/models/4.jpg"
+      alt="A lady with curly hair in a long black winter jacket"
+      loading="lazy">
+  </picture>
+  </div>
+    
+    <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/3-blur.webp"
+        data-srcset="/img/gal/models/3.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/3-blur.jpg"
+        data-src="/img/gal/models/3.jpg"
+        alt="A long-haired lady in colorfull jumper"
+        loading="lazy">
+    </picture>
+    </div>
+    <div
+    class="keen-slider__slide"
+    style="height: 100%;">
+  <picture class="lazy-picture">
+    <source
+      srcset="/img/gal/models/2-blur.webp"
+      data-srcset="/img/gal/models/2.webp"
+      type="image/webp">
+    <img
+      height="100%"
+      src="/img/gal/models/2-blur.jpg"
+      data-src="/img/gal/models/2.jpg"
+      alt="a dark skinned woman in greenish jumper"
+      loading="lazy">
+  </picture>
+  </div>
+    <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/5-blur.webp"
+        data-srcset="/img/gal/models/5.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/5-blur.jpg"
+        data-src="/img/gal/models/5.jpg"
+        alt="A lady in a grey hoodie"
+        loading="lazy">
+    </picture>
+    </div>
+    <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/7-blur.webp"
+        data-srcset="/img/gal/models/7.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/7-blur.jpg"
+        data-src="/img/gal/models/7.jpg"
+        alt="A man in a black jacket and yellow t-shirt"
+        loading="lazy">
+    </picture>
+    </div>
+    <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/8-blur.webp"
+        data-srcset="/img/gal/models/8.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/8-blur.jpg"
+        data-src="/img/gal/models/8.jpg"
+        alt="a young lady in a green t-shirt"
+        loading="lazy">
+    </picture>
+    </div>
+    <!-- <div
+      class="keen-slider__slide"
+      style="height: 100%;">
+    <picture class="lazy-picture">
+      <source
+        srcset="/img/gal/models/9-blur.webp"
+        data-srcset="/img/gal/models/9.webp"
+        type="image/webp">
+      <img
+        height="100%"
+        src="/img/gal/models/9-blur.jpg"
+        data-src="/img/gal/models/9.jpg"
+        alt="Your image's alt"
+        loading="lazy">
+    </picture>
+    </div> -->
+  </div>
+</section>
+<section class="how">
+    <article>
+      <h2>Usługi dla fotografów i e-commerce <br>
+          <span>
+          Usuwanie tła zdjęć - postprodukcja
+          </span>
+          </h2>
+          <h3>NA CZAS</h3>
+          <p>
+              Wiemy jak ważny jest Twój czas. Dokładamy wszelkich starań, aby dostarczyć usługę <span>zawsze</span> w uzgodnionym wcześniej terminie.
+          </p>
+          <h3 style="text-align:left;">PROFESJONALNIE</h3>
+          <p>
+              Do <span>wszystkich</span> powierzonych nam prac podchodzimy z odpowiednią powagą i starannością, odpowiadając wysokim wymaganiom naszych klientów.
+          </p>
+          <h3>W ROZSĄDNEJ CENIE</h3>
+          <p>
+              Działając w branży od 2009 roku i skupiając się <span>wyłącznie</span> na obróbce zdjęć produktowych, stworzyliśmy zgrany zespół i system pracy, dzięki któremu jesteśmy w stanie oferować wysokiej jakości usługę za rozsądną cenę.
+          </p>
+          <a href="/addorder">
+            <button class="primary">
+                dodaj zlecenie
+            </button></a>
+          <mark>
+              szybka odpowiedź | zdjęcie przykładowe gratis<br>
+  bez logowania | bez zobowiązań
+          </mark>
+          <a href="/articles/gallery">
+          <button class="secondary">
+              zobacz przykłady
+          </button></a>
+    </article>
+</section>
+<section class="prices" id="prices">
+    <h2>Jaki jest koszt szparowania?</h2>
+    <p style="width:80vw; max-width:800px;">cena usługi zależy od kilku czynników: poziomu skomplikowania wycinanego elementu, tła na jakim był fotografowany, rozdzielczość a także ilość zdjęć w jednym zleceniu.</p>
+    <div class="card_container">
+      <div class="twoCards">
+    <figure class="card">
+        <picture>
+            <source
+              srcset="/img/price_1.webp"
+              type="image/webp">
+            <img
+              src="/img/gal/models/price_1.jpg"
+              alt="a book"
+              loading="lazy">
+          </picture>
+          <figcaption>
+            <p>od <b>2 zł</b>/sztuka</p>
+            <h3>Prosta bryła - regularny kształt</h3>
+            </figcaption>
+    </figure>
+    <figure class="card">
+        <picture>
+            <source
+              srcset="/img/price_2.webp"
+              type="image/webp">
+            <img
+              src="/img/gal/models/price_2.jpg"
+              alt="a shoe"
+              loading="lazy">
+          </picture>
+          <figcaption>
+            <p><b>4-12 zł</b></p>
+            <h3>Bardziej skomplikowany obiekt</h3>
+            </figcaption>
+    </figure>
+  </div>
+    <div class="twoCards">
+    <figure class="card">
+        <picture>
+            <source
+              srcset="/img/price_3.webp"
+              type="image/webp">
+            <img
+              src="/img/gal/models/price_3.jpg"
+              alt="a long-haired woman standing"
+              loading="lazy">
+          </picture>
+          <figcaption>
+            <p><b>12-16 zł</b></p>
+            <h3>Trudna bryła - włosy</h3>
+            </figcaption>
+    </figure>
+    <figure class="card">
+        <picture>
+            <source
+              srcset="/img/price_4.webp"
+              type="image/webp">
+            <img
+              src="/img/gal/models/price_4.jpg"
+              alt="a baby stroller with many small elements"
+              loading="lazy">
+          </picture>
+          <figcaption>
+            <p>od <b>20 zł</b></p>
+            <h3>Bardzo trudne kształty</h3>
+            </figcaption>
+    </figure>
+  </div>
+</div>
+<article>
+    <h3>
+        Na szczęście nie musisz się nad tym zastanawiać... <br>
+        <span>po prostu nam je wyślij!</span>
+    </h3>
+    <a href="/addorder">
+    <button class="primary">
+        prześlij plki do wyceny
+    </button>
+    </a>
+        <p>
+            <span>oszacujemy koszt obróbki</span> 
+            <span>otrzymasz zdjęcie przykładowe gratis</span>
+            <span>bez konieczności logoawnia</span>
+            <span>bez zobowiązań</span>            <span>bez umów</span> 
+        </p>
+</article>
+</section>
+
+<section class="contact" id="contact">
+    <div class="contact_content">
+        <h2>Formularz kontaktowy</h2>
+        <p>zadaj pytanie lub wyślij zdjęcia do wyceny</p>
+        <div class="arrow desktop">
+        </div>
+        <p class="desktop">Potrzebujesz więcej opcji?<br>
+            <span>jeśli chcesz: <br>
+                wybrać inny sposób transferu plików,<br>
+                zobaczyć listę dodatkowych usług,<br>
+                określić sposób wykonania obróbki,<br>
+                wybrać format zapisu plików, itp.
+            </span>
+        </p>
+        <a class="desktop" href="/addorder"><button class="secondary">
+          stwórz zlecenie
+      </button></a>
+
+    </div>
+
+    <form id="contact_form" enctype="application/x-www-form-urlencoded" name="contact" method="post" action="/contact">
+          <label class="miodek" for="name"></label>
+          <input class="miodek" autocomplete="new-password" type="text" id="surname" name="name" placeholder="To pole musi zostać puste">
+            <input type="nazwa" placeholder="nazwa" name="name_surname">
+            <input type="email" name="user_email" 
+            <% if (user) { %>
+              value="<%=user.email%>"
+             <% } else {  %>
+               placeholder="email*"
+             <% } %> required>
+            <input type="telefon" placeholder="telefon" name="user_phone">
+            <!-- <label for="file">+ Dodaj pliki</label> -->
+            <textarea style="resize: none;" name="order_description" id="" cols="30" rows="3" placeholder="treść wiadomości"></textarea>
+            <div class="file_select">
+                <label for="file-upload"></label>
+                <input id="fileUploadContact" type="file" name="multi_files" accept="image/*" autocomplete="off" multiple>
+              </div>
+              <details>
+                <summary>max 500 MB</summary>
+                <p>Chcąc przesłać większe pliki, <br/>przejdź do zakładki <a href="/addorder">prześlij zdjęcia</a> <br/> skorzystaj z innej metody transferu.</p>
+              </details>
+            <input type="submit" value="wyślij">
+        </form>
+        <div class="contact_content">
+        <p class="mobile">Potrzebujesz więcej opcji?<br>
+          <span>jeśli chcesz: <br>
+              wybrać inny sposób transferu plików,<br>
+              zobaczyć listę dodatkowych usług,<br>
+              określić sposób wykonania obróbki,<br>
+              wybrać format zapisu plików, itp.
+          </span>
+      </p>
+      <a class="mobile" href="/addorder"><button class="secondary">
+        stwórz zlecenie
+    </button></a>
+  </div>
+</section>
+<div class="loader_container">
+  <div class="loader">Loading</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/keen-slider@latest/keen-slider.js"></script>
+<script>
+  const hero_image = document.getElementById('hero_image');
+  const hero_image_bcg = document.querySelector('.hero_image_bcg');
+  const upl = document.getElementById('file-upload');
+  const form = document.getElementById("quick_contact_form")
+  const contact_form = document.getElementById("contact_form")
+  const list_ul = document.getElementById('file-upload-filenames');
+  const loader = document.querySelector('.loader_container');
+  const miodek = document.getElementById("name");
+  const cukierek = document.getElementById("surname");
+  const transfer_type = document.getElementById("transfer_type");
+  const fieldset_web = document.getElementById("web");
+  const fieldset_ftp = document.getElementById("ftp");
+  const fieldset_link = document.getElementById("link");
+  const fieldset_other = document.getElementById("other");
+  const contact = document.getElementById("contact_form");
+  const contactFile = document.getElementById("fileUploadContact");
+  const logos = document.getElementById("logos");
+    // validate for image files
+  // show the list of selected files
+
+const _validFileExtensions = [".jpg", ".jpeg", ".jpe", ".bmp", ".gif", ".png", ".tif", ".tiff", ".ai", ".drw", ".pct", ".psp", ".psd", ".raw", ".psb", ".webp" ];    
+function ValidateMultipleInput() {
+  for (let i = 0; i < upl.files.length; ++i) {
+        let sFileName = upl.files.item(i).name;
+            let blnValid = false;
+            for (let j = 0; j < _validFileExtensions.length; j++) {
+                let sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert("Nie można przesłać pliku " + sFileName + ", właściwe formaty: " + _validFileExtensions.join(", "));
+                upl.value = "";
+                return false;
+            }
+    true;
+    }
+} 
+
+// function ValidateContactMultipl() {
+
+// }  
+// Check bottom Form -> contact or order
+function checkFileAdd() {
+  console.log(contactFile.files.length)
+  if (contactFile.files.length <= 0) {
+    return
+  }
+  for (let i = 0; i < contactFile.files.length; ++i) {
+        let sFileName = contactFile.files.item(i).name;
+            let blnValid = false;
+            for (let j = 0; j < _validFileExtensions.length; j++) {
+                let sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert("Nie można przesłać pliku " + sFileName + ", właściwe formaty: " + _validFileExtensions.join(", "));
+                contactFile.value = null;
+                console.log(contactFile.files.length + 'drugi odczyt')
+                contact.setAttribute('enctype', 'application/x-www-form-urlencoded')
+                contact.setAttribute('action', '/contact')
+                return false;
+
+            }  true;
+    }
+  contact.setAttribute('enctype', 'multipart/form-data')
+  contact.setAttribute('action', '/addorder')
+}
+function changePicture(a) {
+  console.log(`url("../img/but_podglad_${a}.webp")`)
+  hero_image_bcg.style.backgroundImage = `url("../img/hero/but_podglad_${a}.webp")`;
+  
+}
+
+  contactFile.onchange = checkFileAdd
+
+  // show loading screen
+  form.addEventListener("submit", function (e) {
+    loader.classList.add('show')
+    //stop form from submitting
+  }, false);
+  // show loading screen
+  contact_form.addEventListener("submit", function (e) {
+    loader.classList.add('show')
+    //stop form from submitting
+  }, false);
+  // catch the predator
+  function zlapMisia() {
+    if (miodek.value == null || miodek.value == '') {
+      miodek.setCustomValidity('');
+    } else {
+      alert('Według naszego programisty jesteś robotem, to pole musi zostać puste')
+      miodek.setCustomValidity("popraw to pole");
+    }
+  }
+  miodek.onchange = zlapMisia;
+
+  function zlapGrubcia() {
+    if (cukierek.value == null || cukierek.value == '') {
+      cukierek.setCustomValidity('');
+    } else {
+      alert('Według naszego programisty jesteś robotem, to pole musi zostać puste')
+      cukierek.setCustomValidity("popraw to pole");
+    }
+  }
+  cukierek.onchange = zlapGrubcia;
+  window.addEventListener('load', () => {
+          setTimeout(() => {
+            var slider = new KeenSlider("#my-keen-slider", {
+    loop: false,
+    mode: "snap",
+    rtl: false,
+    slides: {
+      perView: "auto"
+    },})
+}, 500)
+
+      
+    });
+    // No customer stealing
+    fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=2b79b03066674b8b879e15b411789fea')
+  .then((response) => response.json())
+  .then((data) => 
+  {if(data.country !== "Poland" && data.security.is_vpn != false){
+    logos.style.display = "none"
+  }
+  })
+</script>

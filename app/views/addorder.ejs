@@ -1,0 +1,239 @@
+
+<section class="addorder">
+  <div class="login_signup">
+    <div class="message">
+      <div class="danger"><%=message%></div>
+  </div>
+    <% if (user) { %>
+      <p>
+        Jeśteś zalogowany jako
+      </p>
+      <h3><%= user.email %></h3>
+      <p>Zobacz wszystkie swoje zlecenia:</p>
+      <h3><a href="/dashboard">moje zlecenia</a></h3>
+      <p>
+       Możesz zobaczyć lub edytować swoje dane tutaj:
+      </p>
+      <h3><a href="/client">moje dane</a></h3>
+      <% } else {  %>
+        <p>
+          Jeśli chcesz mieć dostęp do wszystkich <br>swoich zleceń lub dodać dane do faktury.
+        </p>
+        <h3>
+          <a href="/signin">zaloguj się</a>
+        </h3>
+        <p>
+          Nie posiadasz jeszcze konta?
+        </p>
+        <h3>
+          <a href="/signup">zarejestruj się</a>
+        </h3>
+      <% } %>
+
+
+  </div>
+  <div class="form">
+    <form id="addorder" enctype="multipart/form-data" name="addorder" method="post" action="/addorder">
+      <h1>Prześlij pliki</h1>
+      <label class="miodek" for="name"></label>
+      <input class="miodek" autocomplete="new-password" type="text" id="name" name="name" placeholder="To pole musi zostać puste">
+      <label for="user_email">email: </label>
+      <% if (user) { %>
+      <input name="user_email" type="hidden" value="<%= user.email %>" required />
+      <input name="u_e" type="email" value="<%= user.email %>" disabled />
+      <% } else {  %>
+      <input name="user_email" type="email" required />
+      <% } %>
+    
+      <label for="transfer_type">metoda transferu:</label>
+      <select id="transfer_type" name="transfer_type">
+        <option value="web" selected hidden>inna metoda transferu</option>
+        <option value="web">strona szparowanie.pl</option>
+        <option value="link">wklej link</option>
+        <option value="ftp">FTP</option>
+        <option value="inny">inny sposób</option>
+      </select>
+      <fieldset id="web">
+        <div class="file_select">
+          <label for="file-upload"></label>
+          <input id="file-upload" type="file" name="multi_files" accept="image/*" onchange="ValidateMultipleInput()" multiple required>
+        </div>
+        <details>
+          <summary>max 500 MB</summary>
+          <p>Chcąc przesłać pliki większe niż 500MB<br/> skorzystaj z innej <b>metody transferu</b> powyżej.</p>
+        </details>
+        <div class="filename-list-holder">
+          <ul id="file-upload-filenames"></ul>
+        </div>
+      </fieldset>
+    
+      <fieldset id="link" disabled>
+        <label for="link">wklej link tutaj: </label><br>
+        <input name="line1" type="text" placeholder="np. http://wetransfer.com/" required/>
+      </fieldset>
+    
+      <fieldset id="ftp" disabled>
+        <label for="link">Dane serwera FTP: </label><br>
+        <input name="line1" type="text" placeholder="np. ftp://szparowanie.pl/" required/><br>
+        <label for="link">Login: </label><br>
+        <input name="line2" type="text" placeholder="np. nazwa użytkownika" required/><br>
+        <label for="link">Hasło: </label><br>
+        <input name="line3" type="text" placeholder="np. hasło użytkowinka" required/><br>
+        <label for="link">dodatkowe informacje: </label><br>
+        <input name="line4" type="text" placeholder='np. folder "do szparowania"'/><br>
+      </fieldset>
+    
+      <fieldset id="other" disabled>
+        <label for="link">Inny sposób transferu: </label><br>
+        <input name="line1" type="text" placeholder="informacja jak pobrać zdjęcia" required/><br>
+    
+      </fieldset>
+    
+    
+    
+      <label for="order_description">opis zlecenia: </label>
+      <input name="order_description" type="text" />
+    
+      <label for="output_file_format">format wyjściowy:</label>
+      <select id="output_file_format" name="output_file_format">
+        <option value="JPG">JPG</option>
+        <option value="PNG">PNG</option>
+        <option value="TIF">TIF</option>
+        <option value="PSD">PSD</option>
+      </select>
+    
+      <label for="clipping_options">opcje wycinania:</label>
+      <select id="clipping_options" name="clipping_options">
+        <option value="tło transparentne">tło transparentne</option>
+        <option value="zmiana na białe">zmiana na białe tło</option>
+        <option value="ścieżka wektorowa">tylko ścieżka wektorowa</option>
+        <option value="maska">maska</option>
+      </select>
+    <div class="checkbox">
+       
+      <input type="checkbox" id="additional_options_retouch" name="additional_options_retouch" value="1">
+      <label for="additional_options_retouch">retouch</label>
+    </div>
+    <div class="checkbox">
+       
+      <input type="checkbox" id="additional_options_light_color" name="additional_options_light_color" value="1">
+      <label for="additional_options_light_color">popraw kolor / kontrast</label>
+    </div>
+    <div class="checkbox">
+      
+      <input type="checkbox" id="additional_options_crop" name="additional_options_crop" value="1">
+      <label for="additional_options_crop"> wykadruj obraz</label>
+    </div>
+    <div class="checkbox">
+     
+      <input type="checkbox" id="additional_options_shadow" name="additional_options_shadow" value="1">
+      <label for="additional_options_shadow">dodaj cień</label>
+    </div>
+    
+      <input class="btn" type="submit" value="Add Order" />
+      
+    </form>
+  </div>
+  
+
+
+
+</section>
+<div class="loader_container">
+  <div class="loader">Loading</div>
+</div>
+<script>
+  const upl = document.getElementById('file-upload');
+  const form = document.getElementById("addorder")
+  const list_ul = document.getElementById('file-upload-filenames');
+  const loader = document.querySelector('.loader_container');
+  const miodek = document.getElementById("name");
+  const transfer_type = document.getElementById("transfer_type");
+  const fieldset_web = document.getElementById("web");
+  const fieldset_ftp = document.getElementById("ftp");
+  const fieldset_link = document.getElementById("link");
+  const fieldset_other = document.getElementById("other");
+    // validate for image files
+  // show the list of selected files
+
+    var _validFileExtensions = [".jpg", ".jpeg", ".jpe", ".bmp", ".gif", ".png", ".tif", ".tiff", ".ai", ".drw", ".pct", ".psp", ".psd", ".raw", ".psb", ".webp" ];    
+function ValidateMultipleInput() {
+  list_ul.innerHTML = ''; //removes all before inserting
+  console.log(upl)
+  for (let i = 0; i < upl.files.length; ++i) {
+        var sFileName = upl.files.item(i).name;
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert("Nie można przesłać pliku " + sFileName + ", właściwe formaty: " + _validFileExtensions.join(", "));
+                upl.value = "";
+                list_ul.innerHTML = '';
+                return false;
+            }
+    true;
+      let fileName = upl.files.item(i).name
+      const li = document.createElement("li");
+      li.innerHTML = fileName
+      // const textnode = document.createTextNode(fileName);
+      list_ul.appendChild(li);
+    }
+
+
+}
+
+
+
+
+
+
+  // show loading screen
+  form.addEventListener("submit", function (e) {
+    loader.classList.add('show')
+    //stop form from submitting
+  }, false);
+  // catch the predator
+  function zlapMisia() {
+    if (miodek.value == null || miodek.value == '') {
+      miodek.setCustomValidity('');
+    } else {
+      alert('Według naszego programisty jesteś robotem, to pole musi zostać puste')
+      miodek.setCustomValidity("popraw to pole");
+    }
+  }
+  miodek.onchange = zlapMisia;
+
+  transfer_type.addEventListener("change", function () {
+    fieldset_web.disabled = true;
+    fieldset_link.disabled = true;
+    fieldset_ftp.disabled = true;
+    fieldset_other.disabled = true;
+    console.log('elo')
+
+    switch(transfer_type.value) {
+  case "web":
+  fieldset_web.disabled = false;
+    break;
+  case "link":
+  fieldset_link.disabled = false;
+    break;
+  case "ftp":
+  fieldset_ftp.disabled = false;
+    break;
+  case "other":
+  fieldset_other.disabled = false;
+    break;
+  default:
+    // code block
+} 
+  })
+
+
+
+</script>

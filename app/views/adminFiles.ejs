@@ -1,0 +1,12 @@
+<h3>Zlecenie nr: <%= currentOrder %></h3>
+
+<h2>Lista plików:</h2>
+<ul>
+    <a href=""></a>
+</ul>
+<% for (const i in files) { %>
+<li><a href="file:\\\<%= dir %>\app\public\pdf\<%=currentOrder%>_<%=currentOrderRef%>\<%= files[i] %>" target="_blank"><%= files[i] %></a></li>
+<% } %>
+<h3>
+<a href="/adminCPanel/orders/<%=currentOrderRef%>">powrót do zlecenia</a>
+</h3>

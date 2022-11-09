@@ -1,0 +1,100 @@
+<div style="padding: 3em 0; text-align: center;">
+  <h2 style="color: #b85e5e;"><%= error %> </h3>
+    <h2 style="color: #728F1F;"><%= message %> </h3>
+      <h2 style="color: #728F1F;"><%= success %> </h2>
+</div>
+<section class="cPanel">
+
+
+  <div class="lewa">
+    <h1>sortuj</h1>
+    <button class="admin_btn_big">Wszystkie</button>
+    <button class="admin_btn_big">Wycena</button>
+    <button class="admin_btn_big">W trakcie realizacji</button>
+    <button class="admin_btn_big">Płatność - oczekuje</button>
+
+    <h1>szukaj</h1>
+    <button class="admin_btn_big">email</button>
+  </div>
+
+  <div class="prawa">
+    <h1>Zlecenia</h1>
+    <% for (const i in data) { %>
+
+    <div class="orders_list">
+      <div class="orders_info">
+        <button class="button-no-style" type="button" data-bs-toggle="collapse"
+          data-bs-target="#data<%= data[i].dataValues.order_id %>" aria-expanded="false"
+          aria-controls="data<%= data[i].dataValues.order_id %>">
+          <span style="min-width:3em; font-weight: 600;"><%= data[i].dataValues.order_id %></span>
+          <span style="min-width:11em;">
+            <% let date = data[i].dataValues.createdAt %>
+            <%= date.toLocaleString() %>
+          </span>| plików: <%= data[i].dataValues.number_of_files %> | <%= data[i].dataValues.user_email %> |
+          <span
+            style="color: green; justify-self: flex-end; align-self: flex-end;"><%= data[i].dataValues.order_price %>
+            PLN</span>
+        </button>
+        <div class="orders_controls">
+          <div class="admin_btn_small short">
+            <a href=<%= "adminCPanel/orders/" + data[i].dataValues.order_ref %>>edytuj</a>
+          </div>
+          <div class="admin_btn_small long" 
+          <% switch (data[i].dataValues.order_status) {
+                    case "do wyceny": %> title="do_wyceny" <% break;
+                    case "do akceptacji": %> title="do_akceptacji" <% break;
+                    case "anulowane": %> title="anulowane" <% break;
+                    case "odrzucone": %> title="odrzucone" <% break;
+                    case "potwierdzone": %> title="potwierdzone" <% break;
+                    case "do realizacji": %> title="do_realizacji" <% break;
+                    case "gotowe": %> title="gotowe" <% break;
+                    default:
+                    break; } %>>
+              <p class=""><%= data[i].dataValues.order_status %></p><span class="">⚫</span>
+          </div>
+
+            <div class="admin_btn_small long" <% switch (data[i].dataValues.payment_status) {
+                    case "oczekuje": %> title="oczekuje" <% break;
+                    case "zapłacone": %> title="zaplacone" <% break;
+                    case "odroczone": %> title="odroczone" <% break;
+                    case "darmowa wycena": %> title="darmowa_wycena" <% break;
+                    default:
+                    break; } %>>
+                <p class=""><%= data[i].dataValues.payment_status %></p><span class="">⚫</span>
+            </div>
+
+
+
+          </div>
+          
+        </div>
+        <div class="collapse" id="data<%= data[i].dataValues.order_id %>">
+              <div style="max-width: 50vw; padding:1em;">
+                <ul class="list">
+                  <li><b>Nr zlecenia: <%= data[i].dataValues.order_id %></b></li>
+                  <% if (data[i].dataValues.additional_information != null) { %>
+                  <li><b style="color:#972C14">Dodatkowe informacje: <%= data[i].dataValues.additional_information %></b>
+                  </li>
+                  <% } %>
+                  <li><b>Opis</b> <%= data[i].dataValues.order_description %></li>
+                  <li><b>Retusz: </b> <%= data[i].dataValues.additional_options_retouch %></li>
+                  <li><b>Kolor / kontrast: </b> <%= data[i].dataValues.additional_options_light_color %></li>
+                  <li><b>Kadrowanie: </b> <%= data[i].dataValues.additional_options_crop %></li>
+                  <li><b>Dodanie cienia: </b> <%= data[i].dataValues.additional_options_shadow %></li>
+                  <li><b>Termin realizacji</b>
+                    <% let comp_date = data[i].dataValues.completion_date %>
+                    <%= comp_date == null ? 'brak' : comp_date.toLocaleDateString() %></li>
+                  <li><b>Typ transferu: </b><%= data[i].dataValues.transfer_type %></li>
+                  <li><b>Kwota wyceny</b> <%= data[i].dataValues.order_price %> PLN</li>
+                </ul>
+                <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć to zlecenie?')"
+                  action="/adminCPanel/orders/<%= data[i].dataValues.order_ref %>?_method=DELETE">
+                  <input class="admin_btn_small delete" type="submit" value="Usuń zlecenie">
+                </form>
+
+              </div>
+            </div>
+      </div>
+
+      <% } %>
+</section>

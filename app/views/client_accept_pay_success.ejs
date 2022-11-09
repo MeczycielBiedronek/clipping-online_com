@@ -1,0 +1,85 @@
+
+    <section class="accept">
+        <div class="progress_icons">
+          <div class="icon active">
+            <img src="/img/svg/upload.svg" alt="Upload">
+            <p>        stwórz zlecenie</p>
+     
+          </div>
+          <div class="arrow"></div>
+          <div class="icon active">
+            <img src="/img/svg/accept.svg" alt="Upload">
+            <p>        potwierdź</p>
+          </div>
+          <div class="arrow"></div>
+          <div class="icon active">
+            <img src="/img/svg/card_white.svg" alt="Upload">
+            <p>        opłać</p>
+          </div>
+          <div class="arrow"></div>
+          <div class="icon">
+            <img src="/img/svg/download.svg" alt="Upload">
+            <p>        pobierz zdjęcia</p>
+          </div>
+        </div>
+        <div style="min-height: 50vh; justify-content: center;" class="progress_content">
+            <h2 style="color:green;"><%= success %> </h2><br>
+            <h2 style="color:red;"><%= error %></h2><br>
+            <h2 style="color:green; padding-bottom: 1em;">Dziękujemy za wpłatę.</h2>
+            <h3>Gdy zlecenie będzie gotowe, na podany adres e-mail (<span style="text-decoration:underline; color: green;"><%= email %></span> ) wyślemy link do pobrania paczki z plikami.</h3>
+            <h3 style="padding-bottom:1em;">Do usłyszenia niebawem!</h3>
+        
+            <div class="payment_data">
+            <ul class=""><h2>Szczegóły płatności:</h2>
+                <li>
+                    Kwota: <%=payerData.transactions[0].amount.total%> <%=payerData.transactions[0].amount.currency%>  
+                </li>
+                <li>
+                    Metoda: <%=payerData.payer.payment_method%> 
+                </li>
+                <li>
+                    Utworzone: <% let date = new Date(payerData.transactions[0].related_resources[0].sale.create_time) %> 
+    <%= date.toDateString() %>
+    <%= date.toLocaleTimeString() %>
+                </li>
+                <li>
+                    Stan: <%= payerData.transactions[0].related_resources[0].sale.state %>
+                </li>
+                <li>
+                    Przedmiot płatności: <%= payerData.transactions[0].item_list.items[0].name %>
+                </li>
+            </ul>
+                <ul class="payment_data">
+                <h2> Dane</h2>
+                <li>
+                    Email: <%= payerData.payer.payer_info.email %> 
+                </li>
+                <li>
+                    ID: <%= payerData.payer.payer_info.payer_id %>
+                </li>
+                <li>
+                    Nazwa: <%= payerData.payer.payer_info.shipping_address.recipient_name%>
+                </li>
+                </ul>
+                <ul class="payment_data">
+                <h2>Adres</h2>
+                <li>
+                    <%= payerData.payer.payer_info.shipping_address.line1 %>
+                </li>
+                <li>
+                    <%= payerData.payer.payer_info.shipping_address.city %>
+                </li>
+                <li>
+                    <%= payerData.payer.payer_info.shipping_address.postal_code %>
+                </li>
+                <li>
+                    <%= payerData.payer.payer_info.shipping_address.country_code %>
+                </li>
+            </ul>
+        </div>
+         </div>
+         <div class="progress_buttons">
+            Zaloguj się aby zobaczyć pełną listę swoich zleceń. 
+            <a style="text-decoration: underline;" href="/signup">Zobacz swoje zlecenia</a>
+         </div>
+    </section>

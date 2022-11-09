@@ -1,0 +1,40 @@
+    
+    <section class="signin">
+
+        <div class="left">
+            <h3>
+                <a href="/signin">powrót do logowania</a><br>
+            </h3>
+            <p>(anuluj reset hasła)</p>
+        </div>
+        <div class="right">
+            <form id="reset_pass" name="reset_pass" method="post" action="reset_pass/<%= ref %> ">
+                <h2>Reset Password</h2>
+                <label for="email">Email Address</label>
+                <input class="text" name="email" type="text" value="<%= email %>" readonly/>
+                <label for="password">Password</label>
+                <input name="password" type="password" id="password"/>
+                <label for="password">Repeat password</label>
+                <input name="repeat_password" type="password" id="confirm_password"/>
+                <input class="btn" type="submit" value="Reset password" />
+            </form>
+        </div>
+    </section>
+    
+
+
+    <script>
+        const password = document.getElementById("password")
+        const confirm_password = document.getElementById("confirm_password")
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Hasła nie są identyczne");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+    </script>

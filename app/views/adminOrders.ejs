@@ -1,0 +1,91 @@
+    <div class="row d-flex justify-content-center">
+
+        <ul class="col-5 list">
+            <br>
+            <h2>Zlecenie nr: <%= data[0].dataValues.order_id %></h2>
+            <h3>email: <%= data[0].dataValues.user_email %></h3>
+            <h5>telefon: <%= data[0].dataValues.user_phone %></h5>
+            <a href="/adminCPanel/clients/<%= data[0].dataValues.user_email %>/<%= data[0].dataValues.order_ref %>">dane klienta</a><br>
+            <p>nr ref: <%= data[0].dataValues.order_ref %></p>
+            <% let a = data[0].dataValues.completion_date %>
+            <li>Utworzony <% let c = data[0].dataValues.createdAt %>
+                <%= c.toLocaleString() %></li>
+            <li>Ilość plików <b><%= data[0].dataValues.number_of_files %></b></li>
+            <li><b>Opis zlecenia</b> <%= data[0].dataValues.order_description %></li>
+            <li>Format <b> <%= data[0].dataValues.output_file_format %></b></li>
+            <li>Retusz <b><%= data[0].dataValues.additional_options_retouch %></b></li>
+            <li>Kolor / kontrast <b><%= data[0].dataValues.additional_options_light_color %></b></li>
+            <li>Kadrowanie <b><%= data[0].dataValues.additional_options_crop %></b></li>
+            <li>Dodanie cienia <b><%= data[0].dataValues.additional_options_shadow %></b></li>
+            <li><b>Status zlecenia</b> <%= data[0].dataValues.order_status %></li>
+            <% if (data[0].dataValues.additional_information != null) { %>
+            <li><b style="color:red">Dodatkowe informacje: <%= data[0].dataValues.additional_information %></b></li>
+            <% } %>
+            <li><b>Termin realizacji</b> <%= a == null ? '' : a.toLocaleDateString() %></li>
+            <li><b>Typ transferu: </b><%= data[0].dataValues.transfer_type %></li>
+             <%= data[0].dataValues.line1 %><br>
+                <%= data[0].dataValues.line2 %><br>
+                <%= data[0].dataValues.line3 %><br>
+                <%= data[0].dataValues.line4 %><br><br>
+                
+            
+
+            <h3><a href="/adminCPanel">powrót do listy zleceń</a></h3>
+        </ul>
+        <div class="col-4">
+            <form method="POST" onsubmit="return confirm('potwierdzasz?')"
+                action="/adminCPanel/orders/<%= data[0].dataValues.order_ref %>?_method=PUT">
+                <br>
+                <input name="order_id" type="hidden" value="<%= data[0].dataValues.order_id %>" />
+                <input name="user_email" type="hidden" value="<%= data[0].dataValues.user_email %>" />
+                <input name="order_ref" type="hidden" value="<%= data[0].dataValues.order_ref %>" />
+                <input name="created_date" type="hidden" value="<%= c.toLocaleString() %>" />
+                <br>
+                <label for="completion_date">Termin realizacji:</label><br>
+
+                <input name="completion_date" type="date"
+                    value="<%let b=data[0].dataValues.completion_date%><%=b==null?'brak':b.toISOString().slice(0,10)%>"
+                    required />
+                <br>
+                <label for="order_price">Kwota wyceny:</label><br>
+                <input id="o_price" name="order_price" type="number" min="10" value="<%=data[0].dataValues.order_price%>" required/>
+                <br>
+                <label for="order_status">Status zlecenia:</label><br>
+                <select name="order_status">
+                    <option selected><%= data[0].dataValues.order_status %> </option>
+                    <option value="do akceptacji">do akceptacji</option>
+                    <option value="do realizacji">przyjęte do realizacji</option>
+                    <option value="gotowe">gotowe</option>
+                </select>
+                <br>
+                <label for="payment_status">Status płatnośći:</label><br>
+                <select id="p_status" name="payment_status" onchange="validate_price()">
+                    <option selected><%= data[0].dataValues.payment_status %> </option>
+                    <option value="oczekuje">oczekuje</option>
+                    <option value="zapłacone">zapłacone</option>
+                    <option value="odroczone">odroczone</option>
+                    <option value="darmowa wycena">darmowa wycena</option>
+
+                </select>
+                <br><br>
+                <label for="ready_package_link">Gotowe zdjęcia</label><br>
+                <input name="ready_package_link" type="text" value="<%=data[0].dataValues.ready_package_link%>" placeholder="link"/>
+                <br>
+                <label for="uwagi">Uwagi dla klienta</label><br>
+                <input name="uwagi" type="text" value="" placeholder="brak" />
+                <br><br>
+                <input class="admin_btn_big" type="submit" value="Zapisz zmiany" /><br>
+                <label for="dont_send">Nie wysyłaj wiadomości</label>
+                <input type="checkbox" name="dont_send" value="1">
+            </form>
+        </div>
+
+    </div>
+<script>
+    const p_status = document.getElementById('p_status')
+    const o_price = document.getElementById('o_price')
+    const validate_price = () => {
+        p_status.value == "darmowa wycena" ? o_price.disabled = true : o_price.disabled = false
+    }
+    validate_price()
+</script>

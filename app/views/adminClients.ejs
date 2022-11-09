@@ -1,0 +1,24 @@
+<h3>LOGIN: <%= user.email %></h3>
+Konto utworzone <% let date = user.createdAt %>
+                <%= date.toLocaleString() %>
+</h3>
+            <ul class="list"> <h3>Personalia</h3></ul>
+            <li>Imię i nazwisko <%= user.first_last_name %></li>
+            <li>email <%= user.email %></li>
+            <li>telefon <%= user.phone %></li>
+        </ul>
+<br>
+            <ul class="list"> <h3>Dane fakturowe</h3>
+                
+            <li>Firma: <%= user.comp_name %></li>
+            <li>Nr podatkowy / NIP: <%= user.tax_number %></li>
+            <li>Kraj: <%= user.country %></li>
+            <li>Miasto: <%= user.address_line1 %></li>
+            <li>Ulica: <%= user.address_line2 %></li>
+            <li>Poczta: <%= user.address_line3 %></li>
+           
+            </ul>
+<br>
+<h3>
+<a href="/adminCPanel/orders/<%=currentOrder%>">powrót do zlecenia</a>
+</h3>

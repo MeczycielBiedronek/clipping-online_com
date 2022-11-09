@@ -1,0 +1,172 @@
+<section class="dashboard">
+    <div class="left">
+<div class="message">
+    <div class="danger"><%=message%></div>
+    <div class="danger"><%=error%></div>
+    <div class="success"><%=success%></div>
+</div>
+<h2>Panel klienta</h2>
+    <% if (user) { %>
+        <p>
+          Jeśteś zalogowany jako
+        </p>
+        <h3><%= user.email %></h3>
+        <div class="left_side_buttons">
+        <h3><a href="/dashboard">lista moich zleceń</a></h3>
+        <h3><a href="/client">moje dane</a></h3>
+        <h3><a href="/logout">wyloguj się</a></h3>
+    </div>
+        <% } else {  %>
+            <div class="left_side_buttons">
+            <p>
+            Jeśli chcesz mieć dostęp do wszystkich <br>swoich zleceń lub dodać dane do faktury.
+          </p>
+          <h3>
+            <a href="/signin">zaloguj się</a>
+          </h3>
+          <p>
+            Nie posiadasz jeszcze konta?
+          </p>
+          <h3>
+            <a href="/signup">zarejestruj się</a>
+          </h3>
+        </div>
+        <% } %>
+    </div>
+        <div class="right">
+            <h2>zlecenie nr. <%= data[0].dataValues.order_id %></h2>
+            <ul class="list"> 
+                <li class="orders">
+            <p>
+                <span>
+                    utworzone: 
+                </span><% let date = data[0].dataValues.createdAt %><%= date.toLocaleString() %>
+                
+            </p>
+            <p>
+                <span>
+                    nr. referencyjny: 
+                </span><%=data[0].dataValues.order_ref%>
+                
+            </p>
+            <p>
+                <span>
+                    ilość plików: 
+                </span><%=data[0].dataValues.number_of_files%>
+                
+            </p>
+            <p>
+                <span>
+                    metoda transferu: 
+                </span><%=data[0].dataValues.transfer_type%>
+                <p><%=data[0].dataValues.line1%></p>
+                <p><%=data[0].dataValues.line2%></p>
+                <p><%=data[0].dataValues.line3%></p>
+                <p><%=data[0].dataValues.line4%></p>
+            </p>
+            <p>
+                <h3>szczegóły usługi</h3>
+            </p> 
+               <p>
+                <span>
+                    opis:
+                </span><%=data[0].dataValues.order_description%>
+              
+            </p>
+            <p>
+                <span>
+                    retusz
+                </span><%=data[0].dataValues.additional_options_retouch%>
+                
+            </p>
+            <p>
+                <span>
+                    poprawa koloru / kontrastu
+                </span><%=data[0].dataValues.additional_options_light_color%>
+            </p>
+            <p>
+                <span>
+                    kadrowanie
+                </span><%=data[0].dataValues.additional_options_crop%>
+            </p>
+
+            <p>
+                <span>
+                    dodanie cienia
+                </span><%=data[0].dataValues.additional_options_shadow%>
+            </p>
+            <p><h3>aktualny status zlecenia</h3></p>
+            <p>
+                <span>stan: </span><i <%switch(data[0].dataValues.order_status){
+                    case "do wyceny": %> style="color: black;" <% break;
+                    case "do akceptacji": %> style="color: #972C14;" <% break;
+                    case "anulowane": %> style="color: #972C14;" <% break;
+                    case "odrzucone": %> style="color: #972C14;" <% break;
+                    case "potwierdzone": %> style="color: #149747;" <% break;
+                    case "do realizacji": %> style="color: #149747;" <% break;
+                    case "gotowe": %> style="color: #149747;" <% break;
+                    default:
+                    break; } %>><%= data[0].dataValues.order_status %></i>
+            </p>            
+            <p>
+                <span>
+                    koszt: 
+                </span><%= data[0].dataValues.order_price %> PLN
+            </p>
+
+            <p>
+                <span>płatność: </span><i <% switch (data[0].dataValues.payment_status) {
+                    case "oczekuje": %> style="color: #972C14;" <% break;
+                    case "zapłacone": %> style="color: #149747;" <% break;
+                    case "odroczone": %> style="color: black;" <% break;
+                    case "darmowa wycena": %> style="color: #149747;" <% break;
+                    case "potwierdzenie pdf": %> style="color: #149747;" <% break;
+                    default:
+                    break; } %>><%= data[0].dataValues.payment_status %></i>
+            </p>
+            <p>
+                <span>
+                    termin wykonania:
+                </span><% let com_date = data[0].dataValues.completion_date %>
+                <%= com_date == null ? 'brak' : com_date.toLocaleDateString() %>
+            </p>
+            <p>
+                <span>
+                    
+                </span>
+            </p>
+            <p>
+                           Link do pobrania gotowych zdjęć:
+            <a style="color:green;" href="<%= data[0].dataValues.ready_package_link %>"
+                download><%= data[0].dataValues.ready_package_link %></a>
+            </p>
+
+            
+
+            </li>
+            <li class="controllers">
+            <% if (data[0].dataValues.order_status == "do wyceny") { %>
+                <form class="no_style" method="POST" onsubmit="return confirm('Czy na pewno chcesz anulować to zlecenie?')" action="/abort/<%= data[0].dataValues.order_ref %>?_method=PUT">
+                    <input style="color: #686868; font-size: 1.5em" type="submit" value="Anuluj zlecenie">
+                </form>
+            <% } %>
+            <% if (data[0].dataValues.order_status == "do akceptacji" &&  data[0].dataValues.payment_status == "oczekuje" ) { %>
+                <a style="color: #686868; font-size: 1.5em;" href="/decline/<%= data[0].dataValues.order_ref %>">Rezygnuje</a>
+                <a style="color: #149747; font-size: 1.5em" href="/confirm/<%= data[0].dataValues.order_ref %>">Akceptuje</a>
+                <br>
+            <% } %>
+            <% if ((data[0].dataValues.payment_status == "oczekuje" && ( data[0].dataValues.order_status == "potwierdzone" || data[0].dataValues.order_status == "do realizacji" || data[0].dataValues.order_status == "gotowe")) || (data[0].dataValues.payment_status == "odroczone" && data[0].dataValues.order_status == "gotowe" )) { %>
+                <a style="color: #149747; font-size: 1.5em" href="/accept/<%= data[0].dataValues.order_ref %> ">Opłać</a>
+                <% } %>
+            </li>
+            </ul>
+        </div>
+</section>
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+
+    <h1><%= username %> </h1>
+    <h1><%= success %> </h1>
+    <h2>Dashboard</h2>
+    <h2>
+        <%= logged_email %> 
+        's orders.</h2>
+    <h3>
+    <a href="/addorder">Add order</a>
+    </h3>
+    <br>
+    <h3>
+    <a href="/logout">Log out</a>
+    </h3>
+    <br>
+    <h2>All my orders</h2>
+    <% for (const i in data) { %>
+        <ul class="list">ORDER NR <%= data[i].dataValues.order_id %>  </ul>
+        <li>Created <%= data[i].dataValues.createdAt %></li>
+        <li>Number of files <%= data[i].dataValues.number_of_files %></li>
+        <li>Order description <%= data[i].dataValues.order_description %></li>
+        <li>Retouch <%= data[i].dataValues.additional_options_retouch %></li>
+        <li>Light/color correction <%= data[i].dataValues.additional_options_light_color %></li>
+        <li>Crop image <%= data[i].dataValues.additional_options_crop %></li>
+        <li>Add shadow <%= data[i].dataValues.additional_options_shadow %></li>
+        <li>Order status <%= data[i].dataValues.order_status %></li>
+        <li>Completion date <%= data[i].dataValues.completion_date %></li>
+        <li>Link <%= data[i].dataValues.line1 %></li>
+        <a href=<%= "/orders/" + data[i].dataValues.order_ref %>>Szczegóły zlecenia</a>
+        </ul>
+      <% } %>

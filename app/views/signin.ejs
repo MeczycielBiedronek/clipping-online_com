@@ -1,0 +1,29 @@
+
+   <section class="signin">
+
+
+        <div class="left">
+            <div class="message">
+                <div class="danger"><%=message%></div>
+                <div class="success"><%=success%></div>
+            </div>
+            
+            <h3>
+                <a href="/signup">Zarejestru się!</a>
+            </h3>
+            <p>Nie posiadasz konta?</p>
+        </div>
+        <div class="right">
+
+            <form id="signin" name="signin" method="post" action="signin">
+                <h1>Logowanie</h1>
+                <label for="email">Email Address</label>
+                <input class="text" name="email" type="text" required/>
+                <label for="password">Password</label>
+                <input name="password" type="password" required/>
+                <input class="btn" type="submit" value="Sign In" />
+                <a href="/forgotPass">Zapomniałem hasła</a>
+            </form>
+        </div>
+
+    </section>

@@ -1,0 +1,155 @@
+<section class="accept">
+    <div class="progress_icons">
+      <div class="icon active">
+        <img src="/img/svg/upload.svg" alt="Upload">
+        <p>        stwórz zlecenie</p>
+
+      </div>
+      <div class="arrow"></div>
+      <div class="icon active">
+        <img src="/img/svg/accept.svg" alt="Upload">
+        <p>        potwierdź</p>
+      </div>
+      <div class="arrow"></div>
+      <div class="icon active">
+        <img src="/img/svg/card_white.svg" alt="Upload">
+        <p>        opłać</p>
+      </div>
+      <div class="arrow"></div>
+      <div class="icon">
+        <img src="/img/svg/download.svg" alt="Upload">
+        <p>        pobierz zdjęcia</p>
+      </div>
+    </div>
+    <div class="progress_content">
+      <div class="order_data">
+        Zlecenie nr: <span><%= data[0].dataValues.order_id %> (<% let date = data[0].dataValues.createdAt %>
+          <%= date.toLocaleString() %>)</span>
+        <h3> kwota: <span><%= data[0].dataValues.order_price %></span> PLN</h3>
+    </div>
+    <div class="pdf_field" id="pdf_field">
+        <div class="details">
+            <h2>Dane konta</h2>
+            <p>nazwa</p> 
+            <h3>Clipping Online</h3>
+            <p>numer konta</p> 
+            <h3>04 2490 0005 0000 4000 6415 2083</h3>
+            <p>bank</p> 
+            <h3>Alior Bank</h3>
+            <p>kwota</p> 
+            <h3><%= data[0].dataValues.order_price %> PLN</h3>
+        </div>
+
+        <div class="pdf_send">
+            <form method="post" id="send_pdf" enctype="multipart/form-data" action="/confirmsend/<%= data[0].dataValues.order_ref %>?_method=PUT">
+                <input type="hidden" name="order_id" value="<%= data[0].dataValues.order_id %>">
+                <input type="hidden" name="order_ref" value="<%= data[0].dataValues.order_ref %>">
+                <input type="hidden" name="user_email" value="<%= data[0].dataValues.user_email %>">
+                <label for="pdf"> <img src="/img/svg/pdf_file.svg" alt="PDF"> wybierz plik</label>
+                <input style="display: none;" type="file" name="pdf" id="pdf" accept=".jpg, .jpeg, .png, .pdf" required single
+                    onchange="ValidateMultipleInput()">
+                <ul id="file-upload-filenames">
+                </ul>
+                <input id="submit" type="submit" value="Prześlij plik">
+            </form>
+        </div>
+        
+    </div>
+      <h1>Wybierz formę płatności</h1>  
+      <h1 style="color:green;"><%=message%></h1>
+      <div class="pay_methods">
+        <div>
+            <form id="pay_payPal" action="/paypal/<%= data[0].dataValues.order_ref %>" method="post">
+                <label for="payPal"><img src="/img/svg/paypal.svg" alt="Pay with payPal"></label>
+                <input id="payPal" style="display:none" type="submit" value="zapłac z PayPal">
+            </form>
+            Zapłać kartą z PayPal
+        </div>
+        <div id="pdf_open">
+            <div><img src="/img/svg/pdf.svg" alt="Pay and send PDF"></div>
+            przelej środki i wyślij potwierdznie PDF
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="loader_container">
+    <div class="loader">Ładuję</div>
+  </div>
+<!-- <label for="id">Numer zlecenia:</label>
+<input type="text" name="id" value="<%= data[0].dataValues.order_id %>" disabled>
+<label for="price">Koszt:</label>
+<input type="text" name="price" value="<%= data[0].dataValues.order_price %>" disabled>
+<label for="cur">Waluta:</label>
+<input type="text" name="cur" value="PLN" disabled> -->
+
+
+
+
+
+
+
+<script>
+    const upl = document.getElementById('pdf');
+    const send_pdf = document.getElementById("send_pdf")
+    const pay_payPal = document.getElementById("pay_payPal")
+    const pdf_field = document.getElementById("pdf_field")
+    const pdf_open = document.getElementById("pdf_open")
+    const list_ul = document.getElementById('file-upload-filenames');
+    const loader = document.querySelector('.loader_container');
+    const _validFileExtensions = [".jpg", ".jpeg", ".png", ".pdf"];
+
+    send_pdf.addEventListener("submit", function (e) {
+    loader.classList.add('show')
+    //stop form from submitting
+  }, false);
+
+  pay_payPal.addEventListener("submit", function (e) {
+    loader.classList.add('show')
+    //stop form from submitting
+  }, false);
+
+    pdf_open.addEventListener('click', ()=>{
+        // pdf_field.classList.toggle('pdf_field_show')
+        if (pdf_field.style.maxHeight){
+            pdf_field.style.maxHeight = null;
+    } else {
+        pdf_field.style.maxHeight = "100vh";
+    } 
+    },false)
+
+    function ValidateMultipleInput() {
+        list_ul.innerHTML = ''; //removes all before inserting
+        console.log(upl)
+        for (let i = 0; i < upl.files.length; ++i) {
+            var sFileName = upl.files.item(i).name;
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() ==
+                    sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+
+            if (!blnValid) {
+                alert("Nie można przesłać pliku " + sFileName + ", właściwe formaty: " + _validFileExtensions.join(
+                    ", "));
+                upl.value = "";
+                list_ul.innerHTML = '';
+                return false;
+            }
+            true;
+            let fileName = upl.files.item(i).name
+            const li = document.createElement("li");
+            li.innerHTML = fileName
+            // const textnode = document.createTextNode(fileName);
+            list_ul.appendChild(li);
+        }
+
+
+    }
+</script>

@@ -1,0 +1,48 @@
+<section class="landing404">
+    <div class="content">
+
+            <h2 style="color:#149747;"><%=message%></h2>
+            <h2 style="color:#972C14"><%=error%></h2>
+            <h2 style="color:#149747;"><%=success%></h2>
+            <div class="left_side_buttons">
+            <% if (user) { %>
+                <p>
+                  Jeśteś zalogowany jako
+                </p>
+                <h2><%= user.email %></h2>
+                <div class="left_side_buttons">
+                <h3><a href="/addorder">+ dodaj zlecenie</a></h3>
+                <h3><a href="/dashboard">panel klienta</a></h3>
+                <h3><a href="/client">moje dane</a></h3>
+                <h3><a href="/logout">wyloguj się</a></h3>
+            </div>
+                <% } else {  %>
+                    <div class="left_side_buttons">
+
+                  <h3>
+                    <a href="/signin">zaloguj się</a>
+                  </h3>
+                  <p>
+                    Jeśli chcesz mieć dostęp do wszystkich <br>swoich zleceń lub dodać dane do faktury.
+                  </p>
+<br><br>
+                  <h3>
+                    <a href="/signup">zarejestruj się</a>
+                  </h3>
+                  <p>
+                    Nie posiadasz jeszcze konta?
+                  </p>
+                </div>
+                <% } %>
+            </div>
+
+    </div>
+    <div class="bcg">
+    </div>
+</section>
+
+
+
+
+
+

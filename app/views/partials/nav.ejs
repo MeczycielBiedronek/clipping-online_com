@@ -1,0 +1,23 @@
+ <a class="nav_logo" href="/"> <img  src="/img/svg/szparowanie_pl.svg" alt="LOGO"> 
+   <h1>szparowanie.pl</h1>
+</a>
+
+<nav class="desktop-nav" id="nav">
+   <a href="/addorder" title="add-order">dodaj zlecenie</a>
+   <a href="/#prices">cennik</a>
+   <a href="/#contact">kontakt</a>
+
+   <% if (user) { %>
+   <a href="/dashboard">panel klienta<% user.email %> </a>
+
+   <% } %>
+   <% if (!user) { %>
+   <a href="/signin">login</a>
+   <% } %>
+</nav>
+<div class="mobile_nav">
+   <button id="burger" class="open-main-nav">
+      <span class="burger"></span>
+      <span class="burger-text">menu</span>
+   </button>
+</div>

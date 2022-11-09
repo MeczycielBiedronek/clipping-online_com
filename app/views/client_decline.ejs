@@ -1,0 +1,56 @@
+<section class="accept">
+
+  <div class="progress_icons">
+    <div class="icon active">
+      <img src="/img/svg/upload.svg" alt="Upload">
+      <p>        stwórz zlecenie</p>
+
+    </div>
+    <div class="arrow"></div>
+    <div class="icon active">
+      <img src="/img/svg/accept.svg" alt="Upload">
+      <p>        potwierdź</p>
+    </div>
+    <div class="arrow"></div>
+    <div class="icon">
+      <img src="/img/svg/card.svg" alt="Upload">
+      <p>        opłać</p>
+    </div>
+    <div class="arrow"></div>
+    <div class="icon">
+      <img src="/img/svg/download.svg" alt="Upload">
+      <p>        pobierz zdjęcia</p>
+    </div>
+  </div>
+  <div class="progress_content">
+    Widzę, że nie spodobała Ci się nasza oferta, <br>
+    pragniemy ulepszać nasze usługi i jakość obsługi klienta, <br>
+    dlatego docenimy Twoją opinię...
+    <h1>Dlaczego zrezygnowałeś?</h1>
+    <form method="POST" action="/decline/<%= data[0].dataValues.order_ref %>?_method=PUT">
+<div>      <label for="reason_select">powód:</label>
+  <select id="reason_select" name="reason_select">
+    <option value="zbyt wysoka cena">zbyt wysoka cena</option>
+    <option value="długi termin realizacji">długi termin realizacji</option>
+    <option value="jakość wykonania">jakość wykonania</option>
+    <option value="słaby kontakt">słaby kontakt</option>
+    <option value="inne">inne</option>
+  </select> 
+</div>
+<div>
+  <label for="reason_desc">inna przyczyna: </label><br>
+  <input name="reason_desc" type="text" value="" />
+</div>
+<div>
+  <input class="btn" type="submit" value="wyślij opinię" />
+  <input name="reason_id" type="hidden" value="<%= data[0].dataValues.order_id %>" />
+  <input name="reason_email" type="hidden" value="<%= data[0].dataValues.user_email %>" />
+</div>
+
+
+  </form>
+  </div>
+  </section>
+
+
+

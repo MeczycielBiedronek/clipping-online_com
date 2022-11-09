@@ -1,0 +1,12 @@
+GET http://localhost:5000/
+
+###
+GET http://localhost:5000/addorder
+
+###
+GET http://localhost:5000/admin
+
+###
+GET http://localhost:5000/adminCPanel
+
+

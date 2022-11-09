@@ -1,0 +1,29 @@
+<section class="signin">
+    <div class="left">
+
+        <div class="message">
+                <div class="danger"><%=message%></div>
+                <div class="success"><%=success%></div>
+        </div>
+        <h3>
+            <a href="/signin">powrót do logowania</a><br>
+        </h3>
+        
+        <h3>
+            <a href="/signup">Załóż nowe konto</a>
+        </h3>
+        <p>liczne próby nie powiodły się?</p>
+    </div>
+    <div class="right">
+        <form id="resetPass" name="resetPass" method="post" action="resetPass">
+            <h2>Resetowanie hasła</h2>
+            <label for="email">Email Address</label>
+            <input class="text" name="email" type="text" />
+            <input class="btn" type="submit" value="Zresetuj hasło" />
+        </form>
+    </div>
+</section>
+     
+
+
+

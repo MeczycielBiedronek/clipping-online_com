@@ -1,0 +1,90 @@
+<style>
+    .keen-slider:not([data-keen-slider-disabled]){-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;align-content:flex-start;display:flex;overflow:hidden;position:relative;touch-action:pan-y;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-khtml-user-select:none;width:100%}.keen-slider:not([data-keen-slider-disabled]) 
+    .keen-slider__slide{min-height:100%;overflow:hidden;position:relative;width:100%}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-reverse]{flex-direction:row-reverse}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-v]{flex-wrap:wrap}
+</style>
+<section class="article gallery" style="background-color: #fff;">
+        <div id="my-keen-slider" class="keen-slider">
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img">
+              <div class="swipeIndicator"><svg width="195" height="183" viewBox="0 0 195 183" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M56.8291 105.626C49.611 110.555 46.002 118.713 46.002 130.1C46.002 147.179 66.9971 176.374 85.9296 176.374C104.862 176.374 115.842 176.374 134.372 176.374C152.903 176.374 164.158 160.175 164.158 147.179C164.158 129.708 164.158 112.236 164.158 94.7633C164.158 87.2205 158.054 81.0997 150.511 81.0787C142.996 81.0576 136.886 87.1334 136.865 94.6492C136.865 94.6619 136.865 94.6745 136.865 94.6871V95.1141" stroke="#149747" stroke-width="12" stroke-linecap="round"/>
+                <path d="M62.7129 115.145V23.5103C62.7129 16.0358 68.7723 9.97656 76.2469 9.97656C83.7214 9.97656 89.7804 16.0358 89.7804 23.5103V90.7572" stroke="#149747" stroke-width="12" stroke-linecap="round"/>
+                <path d="M89.7773 92.2391V74.6023C89.7773 68.0872 95.0589 62.8057 101.574 62.8057C108.089 62.8057 113.371 68.0872 113.371 74.6023V94.0358" stroke="#149747" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M113.268 95.008V83.0158C113.268 76.5008 118.549 71.2192 125.064 71.2192C131.579 71.2192 136.861 76.5008 136.861 83.0158V96.4598" stroke="#149747" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M62.7871 24.9302H188.99" stroke="#149747" stroke-width="12" stroke-linecap="round"/>
+                <path d="M12 25L189 25" stroke="#149747" stroke-width="12" stroke-linecap="round"/>
+                <path d="M27.0332 43.8608L20.0218 37.5507L5.99942 24.9304L20.0218 12.3101L27.0332 6" stroke="#149747" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M167.955 43.8608L174.966 37.5507L188.989 24.9304L174.966 12.3101L167.955 6" stroke="#149747" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>przewijaj <br>w lewo i w prawo</span>
+                </div>
+            </div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+           <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+          <div class="keen-slider__slide lazy__slide">
+            <div class="gal_img"></div>
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/keen-slider@6.8.2/keen-slider.min.js"></script>
+        <script>
+          var swipe = document.querySelector('.swipeIndicator')
+          var images = [
+            "img_bcg_1",
+            "img_bcg_2",
+            "img_bcg_3",
+            "img_bcg_4",
+            "img_bcg_5",
+            "img_bcg_6",
+            "img_bcg_7",
+            "img_bcg_8",
+            "img_bcg_9",
+            "img_bcg_10",
+          ]
+          var loaded = []
+          function loadImages(s) {
+            const slideIdx = s.track.details.rel
+            loaded[slideIdx] = true
+    
+            s.slides.forEach((element, idx) => {
+              if (loaded[idx])
+                element.querySelector(".gal_img").style.backgroundImage = `url('/img/gal/samples/${images[idx]}.webp')`
+                // element.querySelector("img").setAttribute("src", images[idx])
+            })
+          }
+          var slider = new KeenSlider("#my-keen-slider", {
+            animationEnded: loadImages,
+            created: loadImages,
+            loop: true,
+            initial: 0,
+          })
+          swipe.addEventListener('click', ()=>{
+            swipe.style.opacity = 0;
+          })
+          setInterval(()=>{
+            swipe.style.opacity = 0;
+          }, 2000)
+        </script>
+</section>

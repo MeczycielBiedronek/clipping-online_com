@@ -1,0 +1,53 @@
+  <section class="accept">
+
+    <div class="progress_icons">
+      <div class="icon active">
+        <img src="/img/svg/upload.svg" alt="Upload">
+        <p>        stwórz zlecenie</p>
+
+      </div>
+      <div class="arrow"></div>
+      <div class="icon active">
+        <img src="/img/svg/accept.svg" alt="Upload">
+        <p>        potwierdź</p>
+      </div>
+      <div class="arrow"></div>
+      <div class="icon">
+        <img src="/img/svg/card.svg" alt="Upload">
+        <p>        opłać</p>
+      </div>
+      <div class="arrow"></div>
+      <div class="icon">
+        <img src="/img/svg/download.svg" alt="Upload">
+        <p>        pobierz zdjęcia</p>
+      </div>
+    </div>
+    <div class="progress_content">
+      <div class="order_data">
+        Zlecenie nr: <span><%= data[0].dataValues.order_id %> (<% let date = data[0].dataValues.createdAt %>
+          <%= date.toLocaleString() %>)</span>
+      </div>
+      <h1>Przygotowaliśmy dla Ciebie świetną ofertę!</h1>  
+
+      <p>
+        Koszt usługi wyniesie: <span><%= data[0].dataValues.order_price %></span> PLN
+      </p>
+      <p>
+        Termin realizacji: <span><%= data[0].dataValues.completion_date.toLocaleDateString() %></span>
+      </p>
+
+      
+      
+    </div>
+
+    <div class="progress_buttons">
+      <a style="color: #686868;" href="/decline/<%= data[0].dataValues.order_ref %>">Rezygnuje</a> |
+      <a style="color: #149747" href="/confirm/<%= data[0].dataValues.order_ref %>">Akceptuje
+      <div class="little_green_arrow"></div>
+      </a>
+    </div>
+  </section>
+
+
+
+
