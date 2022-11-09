@@ -1,6 +1,5 @@
 # Clipping-online.com
-
-website and file exchange / order placement system
+The online business website equipped with file exchange / order placement system
 
 ## Contributing
 
