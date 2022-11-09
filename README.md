@@ -4,7 +4,7 @@ website and file exchange / order placement system
 
 ## Contributing
 
-REPOSITORY AVAILABLE ONLY FOR JOB APPLICATION PROCESS. 
+REPOSITORY AVAILABLE ONLY FOR A JOB APPLICATION PERIOD. 
 
 ## License
 
