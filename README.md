@@ -4,7 +4,8 @@ The online business website equipped with file exchange / order placement system
 ## Technology utilized:
 - Express
 - EJS - view engine
-- Flash - flash 
+- Passport - user session
+- Connect-flash - display messages
 - NodeMailer
 - Sequelize - for connecting the database
 - Multer - for file transfer (to be replaced by BusBoy due to performance issues)
